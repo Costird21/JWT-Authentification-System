@@ -41,7 +41,7 @@ public class AuthenticationService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         registerRequest.getEmail(),
-                        registerRequest.getEmail())
+                        registerRequest.getPassword())
         );
         var user = userRepository.findUserByEmail(registerRequest.getEmail())
                 .orElseThrow();
