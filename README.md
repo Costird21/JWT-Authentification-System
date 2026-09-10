@@ -78,7 +78,8 @@ Authorization: Bearer <JWT_TOKEN>
 ```
 
 This was tested using Postman to verify that an authenticated request can access a protected Spring Security endpoint.
-<img width="761" height="460" alt="image" src="https://github.com/user-attachments/assets/788b8909-4ac3-4a18-9e7f-0869db58fe0b" />
+
+<img width="635" height="541" alt="image" src="https://github.com/user-attachments/assets/788b8909-4ac3-4a18-9e7f-0869db58fe0b" />
 
 
 ## Testing With Postman
@@ -106,14 +107,17 @@ DemoController
 ```
 
 A request without a valid token is rejected by Spring Security.
-<img width="574" height="466" alt="image" src="https://github.com/user-attachments/assets/29163169-16ed-43eb-931a-fe6a7324b6e7" />
+
+<img width="635" height="541" alt="image" src="https://github.com/user-attachments/assets/29163169-16ed-43eb-931a-fe6a7324b6e7" />
 
 
 ## Registering a user
+
 <img width="635" height="541" alt="image" src="https://github.com/user-attachments/assets/a3fdba04-c8bf-44d2-93e0-65fb040ebd7b" />
 
 ## Authenticating a registered user
-<img width="544" height="521" alt="image" src="https://github.com/user-attachments/assets/a6a7833a-bd62-4925-a089-d6f031fd6a29" />
+
+<img width="635" height="541" alt="image" src="https://github.com/user-attachments/assets/a6a7833a-bd62-4925-a089-d6f031fd6a29" />
 
 
 ## Spring Security
