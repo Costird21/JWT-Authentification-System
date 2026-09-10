@@ -47,14 +47,14 @@ public class JwtService {
                 .compact();
     }
 
-    private boolean isTokenValid(String jwtToken, UserDetails userDetails) {
+    public boolean isTokenValid(String jwtToken, UserDetails userDetails) {
         final String username = extractUsername(jwtToken);
 
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken));
 
     }
 
-    private boolean isTokenExpired(String jwtToken) {
+    public boolean isTokenExpired(String jwtToken) {
 
         return extractExpiration(jwtToken).before(new Date());
 
