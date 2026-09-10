@@ -5,6 +5,8 @@ import com.danielradu.security.user.Role;
 import com.danielradu.security.user.User;
 import com.danielradu.security.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest registerRequest) {
 
@@ -35,8 +38,18 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest registerRequest) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        registerRequest.getEmail(),
+                        registerRequest.getEmail())
+        );
+        var user = userRepository.findUserByEmail(registerRequest.getEmail())
+                .orElseThrow();
 
-        return null;
-
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse
+                .builder()
+                .token(jwtToken)
+                .build();
     }
 }
