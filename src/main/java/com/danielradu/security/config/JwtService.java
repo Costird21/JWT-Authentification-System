@@ -12,6 +12,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 
 @Service
@@ -20,10 +21,10 @@ public class JwtService {
     private static final String SECRET_KEY = "3d67719e7a9ee593f0f7bc508e9f557a4d27773b3a65ae95c281804f70be504d";
 
     public String extractUsername(String jwtToken) {
-        return exctractClaim(jwtToken, Claims::getSubject);
+        return extractClaim(jwtToken, Claims::getSubject);
     }
 
-    public <T> T exctractClaim(String jwtToken, Function<Claims, T> claimsTFunction) {
+    public <T> T extractClaim(String jwtToken, Function<Claims, T> claimsTFunction) {
         final Claims claims = extractAllClaims(jwtToken);
         return claimsTFunction.apply(claims);
     }
@@ -44,6 +45,25 @@ public class JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24)) // 24 hours + 1000 mil. sec.
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
+    }
+
+    private boolean isTokenValid(String jwtToken, UserDetails userDetails) {
+        final String username = extractUsername(jwtToken);
+
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken));
+
+    }
+
+    private boolean isTokenExpired(String jwtToken) {
+
+        return extractExpiration(jwtToken).before(new Date());
+
+    }
+
+    private Date extractExpiration(String jwtToken) {
+
+        return extractClaim(jwtToken, Claims::getExpiration);
+
     }
 
     private Claims extractAllClaims(String jwtToken) {
