@@ -19,7 +19,7 @@ The main goal of the project was to understand how JWT authentication works insi
 
 The application is structured around Spring Security's filter chain and JWT authentication flow.
 
-![JWT Authentication Architecture]<img width="1406" height="792" alt="image" src="https://github.com/user-attachments/assets/4c45e17c-c0f8-4dff-b1dd-eb307b7c39b7" />
+<img width="1406" height="792" alt="image" src="https://github.com/user-attachments/assets/4c45e17c-c0f8-4dff-b1dd-eb307b7c39b7" />
 
 
 ### Authentication Flow
@@ -78,6 +78,8 @@ Authorization: Bearer <JWT_TOKEN>
 ```
 
 This was tested using Postman to verify that an authenticated request can access a protected Spring Security endpoint.
+<img width="761" height="460" alt="image" src="https://github.com/user-attachments/assets/788b8909-4ac3-4a18-9e7f-0869db58fe0b" />
+
 
 ## Testing With Postman
 
@@ -104,6 +106,15 @@ DemoController
 ```
 
 A request without a valid token is rejected by Spring Security.
+<img width="574" height="466" alt="image" src="https://github.com/user-attachments/assets/29163169-16ed-43eb-931a-fe6a7324b6e7" />
+
+
+## Registering a user
+<img width="635" height="541" alt="image" src="https://github.com/user-attachments/assets/a3fdba04-c8bf-44d2-93e0-65fb040ebd7b" />
+
+## Authenticating a registered user
+<img width="544" height="521" alt="image" src="https://github.com/user-attachments/assets/a6a7833a-bd62-4925-a089-d6f031fd6a29" />
+
 
 ## Spring Security
 
