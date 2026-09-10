@@ -16,12 +16,24 @@ import java.io.IOException;
 @RequiredArgsConstructor // It will create a constructor using any final field we declare
 public class JwtAuthentificationFiler extends OncePerRequestFilter {
 
+    private final JwtService jwtService;
+
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
+       final String authHeader = request.getHeader("Authorisation");
+       final String jwtToken;
+       final String userEmail;
 
+       if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+           filterChain.doFilter(request, response);
+           return;
+       }
+
+       jwtToken = authHeader.substring(7);
+       userEmail = jwtService.extractUsername(jwtToken);
     }
 }
